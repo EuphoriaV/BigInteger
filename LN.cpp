@@ -1,41 +1,29 @@
 #include "LN.h"
 LN::LN()
 {
-	try {
-		negative = false;
-		nan = false;
-		number = MyString("0");
-	}
-	catch (std::bad_alloc& e) {
-	}
+	negative = false;
+	nan = false;
+	number = MyString("0");
 }
 LN::LN(const std::string st, const bool neg, const bool nann)
 {
-	try {
-		number = MyString(st.c_str());
-		negative = neg;
-		nan = nann;
-	}
-	catch (std::bad_alloc& e) {
-	}
+	number = MyString(st.c_str());
+	negative = neg;
+	nan = nann;
 }
 LN::LN(const long long val)
 {
-	try {
-		if (val >= 0)
-		{
-			number = MyString(std::to_string(val).c_str());
-			negative = false;
-		}
-		else
-		{
-			number = MyString(std::to_string(-val).c_str());
-			negative = true;
-		}
-		nan = false;
+	if (val >= 0)
+	{
+		number = MyString(std::to_string(val).c_str());
+		negative = false;
 	}
-	catch (std::bad_alloc& e) {
+	else
+	{
+		number = MyString(std::to_string(-val).c_str());
+		negative = true;
 	}
+	nan = false;
 }
 void LN::constructFromString(const MyString temp) {
 	if (temp.get(0) == '-')
@@ -57,39 +45,23 @@ void LN::constructFromString(const MyString temp) {
 }
 LN::LN(const char* val)
 {
-	try {
-		MyString temp(val);
-		constructFromString(temp);
-	}
-	catch (std::bad_alloc& e) {
-	}
+	MyString temp(val);
+	constructFromString(temp);
 }
 LN::LN(const std::string_view val)
 {
-	try {
-		MyString temp(val.data());
-		constructFromString(temp);
-	}
-	catch (std::bad_alloc& e) {
-	}
+	MyString temp(val.data());
+	constructFromString(temp);
 }
 LN::LN(const MyString obj)
 {
-	try {
-		constructFromString(obj);
-	}
-	catch (std::bad_alloc& e) {
-	}
+	constructFromString(obj);
 }
 LN::LN(const LN& obj)
 {
-	try {
-		number = obj.number;
-		negative = obj.negative;
-		nan = obj.nan;
-	}
-	catch (std::bad_alloc& e) {
-	}
+	number = obj.number;
+	negative = obj.negative;
+	nan = obj.nan;
 }
 LN::LN(LN&& obj)
 {
@@ -99,15 +71,10 @@ LN::LN(LN&& obj)
 }
 LN& LN::operator=(const LN& obj)
 {
-	try {
-		number = obj.number;
-		negative = obj.negative;
-		nan = obj.nan;
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return *this;
-	}
+	number = obj.number;
+	negative = obj.negative;
+	nan = obj.nan;
+	return *this;
 }
 LN& LN::operator=(LN&& obj)
 {
@@ -468,152 +435,77 @@ LN LN::mod(const LN& obj) const
 	return this->subtract(temp);
 }
 LN LN:: operator+(const LN& obj) const {
-	try {
-		return this->add(obj);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->add(obj);
 }
 LN LN:: operator-(const LN& obj) const {
-	try {
-		return this->subtract(obj);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->subtract(obj);
 }
 LN LN:: operator*(const LN& obj) const {
-	try {
-		return this->multiply(obj);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->multiply(obj);
 }
 LN LN:: operator/(const LN& obj) const {
-	try {
-		return this->divide(obj);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->divide(obj);
 }
 LN LN:: operator%(const LN& obj) const {
-	try {
-		return this->mod(obj);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->mod(obj);
 }
 LN LN:: operator-() const {
-	try {
-		return this->negate();
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->negate();
 }
 LN LN:: operator~() const {
-	try {
-		return this->sqrt();
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return this->sqrt();
 }
 LN LN::operator+=(const LN& obj)
 {
-	try {
-		*this = this->add(obj);
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-		return *this;
-	}
+	*this = this->add(obj);
+	return *this;
 }
 LN LN::operator-=(const LN& obj)
 {
-	try {
-		*this = this->subtract(obj);
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-		return *this;
-	}
+	*this = this->subtract(obj);
+	return *this;
 }
 LN LN::operator*=(const LN& obj)
 {
-	try {
-		*this = this->multiply(obj);
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-		return *this;
-	}
+	*this = this->multiply(obj);
+	return *this;
 }
 LN LN::operator/=(const LN& obj)
 {
-	try {
-		*this = this->divide(obj);
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-		return *this;
-	}
+	*this = this->divide(obj);
+	return *this;
 }
 LN LN::operator%=(const LN& obj)
 {
-	try {
-		*this = this->mod(obj);
-		return *this;
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-		return *this;
-	}
+	*this = this->mod(obj);
+	return *this;
 }
 LN::operator long long() const
 {
-	try {
-		if (this->nan)
-		{
-			throw std::runtime_error("Value is not a number");
-		}
-		if (*this > LN("9223372036854775807") || *this < LN("-9223372036854775808"))
-		{
-			throw std::runtime_error("Number can't be casted into long long");
-		}
-		long long res;
-		if (*this == LN("-9223372036854775808")) {
-			res = LLONG_MIN;
-		}
-		else {
-			res = std::stoll(this->number.getStr());
-			if (negative)
-			{
-				res = -res;
-			}
-		}
-		return res;
+	if (this->nan)
+	{
+		throw std::runtime_error("Value is not a number");
 	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
+	if (*this > LN("9223372036854775807") || *this < LN("-9223372036854775808"))
+	{
+		throw std::runtime_error("Number can't be casted into long long");
 	}
+	long long res;
+	if (*this == LN("-9223372036854775808")) {
+		res = LLONG_MIN;
+	}
+	else {
+		res = std::stoll(this->number.getStr());
+		if (negative)
+		{
+			res = -res;
+		}
+	}
+	return res;
 }
 LN operator""_ln(const char* str)
 {
-	try {
-		return LN(str);
-	}
-	catch (std::bad_alloc& e) {
-		return LN("", 0, 1);
-	}
+	return LN(str);
 }
 void LN::toString(std::ofstream& out) const
 {
